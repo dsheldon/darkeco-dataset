@@ -1,0 +1,159 @@
+{
+    "title": "Vertical Profile",
+    "file": "profile.json",
+    "description": "A vertical profile of biological activity above a radar station.\nMissing values may occur when a height bin contains no scattering volumes for the relevant radar variable or, for velocity-related fields, if there are numerical issues during velocity profiling.\n",
+    "missingValues": [
+        ""
+    ],
+    "fields": [
+        {
+            "name": "bin_lower",
+            "description": "Lower limit of height bin.\n",
+            "type": "integer",
+            "unit": "m",
+            "constraints": {
+                "required": true,
+                "unique": true,
+                "minimum": 0
+            }
+        },
+        {
+            "name": "height",
+            "description": "Center point of height bin.\n",
+            "type": "integer",
+            "unit": "m",
+            "constraints": {
+                "required": true,
+                "unique": true,
+                "minimum": 0
+            }
+        },
+        {
+            "name": "linear_eta",
+            "description": "Average linear reflectivity for height bin. Represents the radar cross section in <unit>cm^2</unit> per cubic kilometer of atmosphere.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-3}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "nbins",
+            "description": "Number of scattering volumes in height bin.\n",
+            "type": "integer",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "minimum": 0
+            }
+        },
+        {
+            "name": "direction",
+            "description": "Mean direction of travel. The angle is given as a compass bearing in degrees clockwise from north.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 360.0
+            }
+        },
+        {
+            "name": "speed",
+            "description": "Mean (ground) speed of travel.\n",
+            "type": "number",
+            "unit": "m.s^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "u",
+            "description": "Zonal (east-west) velocity component.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "v",
+            "description": "Meridional (north-south) velocity component.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "rmse",
+            "description": "Root-mean squared error of VVP fit for scattering volumes in height bin.\n",
+            "type": "number",
+            "unit": "m.s^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "elev1",
+            "description": "Elevation angle of lowest sweep.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "required": true,
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "nvolumes_gr35_e1",
+            "description": "Number of scattering volumes with reflectivity factor exceeding 35 dBZ in lowest selected sweep.\n",
+            "type": "integer",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "minimum": 0
+            }
+        },
+        {
+            "name": "elev2",
+            "description": "Elevation angle of second lowest sweep.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "required": true,
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "nvolumes_gr35_e2",
+            "description": "Number of scattering volumes with reflectivity factor exceeding 35 dBZ in second lowest selected sweep.\n",
+            "type": "integer",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "minimum": 0
+            }
+        },
+        {
+            "name": "vcp",
+            "description": "NEXRAD volume coverage pattern for scan. Examples are 31, 32, 35 (clear air), 12, 212, 112, 215, 121 (precipitation).\n",
+            "type": "integer",
+            "unit": null,
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "linear_eta_unfiltered",
+            "description": "Average reflectivity for all scattering volumes in height bin, including those classified as rain.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-3}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "percent_rain",
+            "description": "Fraction of scattering volumes in height bin classified as precipitation. This fraction is weighted toward regions closer to the radar in accordance to the density of scattering volumes, which are smaller and more densely packed at closer ranges. In the derived data products, this variable is renamed to `fraction_rain`. \n",
+            "type": "number",
+            "unit": null,
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 1.0
+            }
+        }
+    ]
+}

@@ -1,0 +1,166 @@
+{
+    "title": "Scan-Level Time Series",
+    "file": "scan.json",
+    "description": "A time series of biology measurements for radar volume scans. The measurements are obtained by vertically integrating the profile data. Missing values may rarely occur when a dependent variable in the profile is missing at all elevations.\n",
+    "missingValues": [
+        ""
+    ],
+    "fields": [
+        {
+            "name": "station",
+            "description": "The 4-character station ID. See [station metadata](http://example.com/blob/main/_data/stations-formatted.csv).\n",
+            "type": "string",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "pattern": "[A-Z]{4}"
+            }
+        },
+        {
+            "name": "datetime",
+            "description": "UTC timestamp of record. For scan-level time series, this is the timestamp of the radar volume scan. For 5-minute time series, it is a regularly-spaced 5-minute timestamp.\n",
+            "type": "datetime",
+            "unit": null,
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "solar_elevation",
+            "description": "Sun elevation in degrees above horizon (negative for below horizon) at the radar station's location for the date and time of the record.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "period_date",
+            "description": "The local date of the start of the period (night or day) to which the record belongs. See the `period` field.\n",
+            "type": "date",
+            "unit": null,
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "period",
+            "description": "The period (night or day) to which the record belongs, as determined by the station's location and the date and time of the record.\n",
+            "type": "string",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "enum": [
+                    "night",
+                    "day"
+                ]
+            }
+        },
+        {
+            "name": "period_time",
+            "description": "Hours from the beginning of the period to the time of the current record. See the `period` field.\n",
+            "type": "number",
+            "unit": "h",
+            "constraints": {
+                "required": true,
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "period_length",
+            "description": "Length of the period. See the `period` field.\n",
+            "type": "number",
+            "unit": "h",
+            "constraints": {
+                "required": true,
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "reflectivity",
+            "description": "Vertically integrated reflectivity. Represents total radar cross section in <unit>cm^2</unit> in a vertical column above one square kilometer of the earth's surface. Only includes scattering volumes identified as biology.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-2}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "reflectivity_unfiltered",
+            "description": "Same as `reflectivity`, but includes all scattering volumes, including those classified as precipitation.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-2}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "traffic_rate",
+            "description": "Reflectivity traffic rate, computed by vertically integrating reflectivity multiplied by speed. Represents total radar cross section in <unit>cm^2</unit> crossing over a one kilometer transect in one hour, where the transect is adaptively chosen for each height bin to be perpendicular to the mean direction of travel in that height bin. Only includes scattering volumes identified as biology.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-1}.h^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "traffic_rate_unfiltered",
+            "description": "Same as `traffic_rate`, but includes all scattering volumes, including those classified as precipitation.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-1}.h^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "u",
+            "description": "Zonal (east-west) velocity component, computed as reflectivity-weighted average over height bins.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "v",
+            "description": "Meridional (north-south) velocity component, computed as reflectivity-weighted average over height bins.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "speed",
+            "description": "Mean (ground) speed of travel, computed as reflectivity-weighted average over height bins. This represents the average speed of scatterers across elevation bins, regardless of direction. This is different from, and generally higher than, the magnitude of the reflectivity-weighted average velocities `u` and `v`, because 'cancellation' of objects moving in different directions can occur when averaging velocities.\n",
+            "type": "number",
+            "unit": "m.s^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "direction",
+            "description": "Mean direction of travel, computed directly from `u` and `v`. The angle is given as a compass bearing in degrees clockwise from north.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 360.0
+            }
+        },
+        {
+            "name": "fraction_rain",
+            "description": "Fraction of scattering volumes classified as precipitation.\n",
+            "type": "number",
+            "unit": "fraction",
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 1.0
+            }
+        },
+        {
+            "name": "rmse",
+            "description": "Root-mean squared error of VVP fit, reflectivity-weighted average over height bins.\n",
+            "type": "number",
+            "unit": "m.s^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        }
+    ]
+}

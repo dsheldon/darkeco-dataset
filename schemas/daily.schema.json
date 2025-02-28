@@ -1,0 +1,150 @@
+{
+    "title": "Daily Time Series",
+    "file": "daily.json",
+    "description": "A daily time series of biological measurements for an individual radar station. The measurements are obtained by aggregating the 5-minute time series to a daily time step for different periods (night, day, and calendar date). Missing values may occur if a variable is missing in the 5-minute time series for all records in the period.\n",
+    "missingValues": [
+        ""
+    ],
+    "fields": [
+        {
+            "name": "station",
+            "description": "The 4-character station ID. See [station metadata](http://example.com/blob/main/_data/stations-formatted.csv).\n",
+            "type": "string",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "pattern": "[A-Z]{4}"
+            }
+        },
+        {
+            "name": "date",
+            "description": "UTC date of the record.\n",
+            "type": "date",
+            "unit": null,
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "period",
+            "description": "The period of the day (`night`, `day`, or `utc_calendar_day`) for which records of the 5-minute time series were aggregated to produce this record.\n",
+            "type": "string",
+            "unit": null,
+            "constraints": {
+                "required": true,
+                "enum": [
+                    "night",
+                    "day",
+                    "utc_calendar_day"
+                ]
+            }
+        },
+        {
+            "name": "period_length",
+            "description": "Length of the period. See the `period` field.\n",
+            "type": "number",
+            "unit": "h",
+            "constraints": {
+                "required": true,
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "fraction_missing",
+            "description": "Fraction of 5-minute records in this period that were `missing` when aggregating.\n",
+            "type": "number",
+            "unit": null,
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 1.0
+            }
+        },
+        {
+            "name": "fraction_filled",
+            "description": "Fraction of 5-minute records in this period that were `filled` in the 5-minute time series before aggregating.\n",
+            "type": "number",
+            "unit": null,
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 1.0
+            }
+        },
+        {
+            "name": "reflectivity_hours",
+            "description": "Temporally and vertically integrated reflectivity. Represents accumulated hours of radar cross section in <unit>cm^2</unit> from a vertical column above one square kilometer of the earth's surface. Only includes scattering volumes identified as biology.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-2}.h",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "reflectivity_hours_unfiltered",
+            "description": "Same as `reflectivity_hours`, but integrates `reflectivity_unfiltered` over time instead of `reflectivity`, so it includes measurements from all scattering volumes, including those identified as rain. \n",
+            "type": "number",
+            "unit": "cm^2.km^{-2}.h",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "traffic",
+            "description": "Reflectivity traffic, computed by integrating `traffic_rate` over time. Represents total radar cross section in <unit>cm^2</unit> crossing over a one kilometer transect during the time period. Only includes scattering volumes identified as biology.\n",
+            "type": "number",
+            "unit": "cm^2.km^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "traffic_unfiltered",
+            "description": "Same as `traffic`, but integrates `traffic_rate_unfiltered` over time instead of `traffic_rate`, so it includes measurements from all scattering volumes, including those identified as rain. \n",
+            "type": "number",
+            "unit": "cm^2.km^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "u",
+            "description": "Zonal (east-west) velocity component, computed as reflectivity-weighted average over the time period.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "v",
+            "description": "Meridional (north-south) velocity component, computed as reflectivity-weighted average over the time period.\n",
+            "type": "number",
+            "unit": "m.s^{-1}"
+        },
+        {
+            "name": "direction",
+            "description": "Mean direction of travel, computed as reflectivity-weighted average over the time period. The angle is given as a compass bearing in degrees clockwise from north.\n",
+            "type": "number",
+            "unit": "degree",
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 360.0
+            }
+        },
+        {
+            "name": "speed",
+            "description": "Mean (ground) speed of travel, computed as reflectivity-weighted average over the time period.\n",
+            "type": "number",
+            "unit": "m.s^{-1}",
+            "constraints": {
+                "minimum": 0.0
+            }
+        },
+        {
+            "name": "fraction_rain",
+            "description": "Fraction of scattering volumes classified as precipitation, computed as a simple average over the time period.\n",
+            "type": "number",
+            "unit": null,
+            "constraints": {
+                "minimum": 0.0,
+                "maximum": 1.0
+            }
+        }
+    ]
+}

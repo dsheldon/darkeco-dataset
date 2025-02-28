@@ -1,0 +1,30 @@
+{
+  "name": "darkeco-dataset",
+  "title": "The Dark Ecology Dataset",
+  "resources": [
+    {
+      "name": "profiles",
+      "path": "data/profiles",
+      "format": "csv",
+      "schema": "schemas/profile.schema.json"
+    },
+    {
+      "name": "scan",
+      "path": "data/scan",
+      "format": "csv",
+      "schema": "schemas/scan.schema.json"
+    },
+    {
+      "name": "5min",
+      "path": "data/5min",
+      "format": "csv",
+      "schema": "schemas/5min.schema.json"
+    },
+    {
+      "name": "daily",
+      "path": "data/daily",
+      "format": "csv",
+      "schema": "schemas/daily.schema.json"
+    }
+  ]
+}
